@@ -1,5 +1,4 @@
 from django.db import models
-
 from django.contrib.auth.models import AbstractUser
 
 
@@ -34,4 +33,41 @@ class User(AbstractUser):
     def __str__(self):
         return self.username
 
-# Create your models here.
+
+class HospitalProfile(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name="hospital_profile"
+    )
+    hospital_name = models.CharField(max_length=200)
+    address = models.TextField()
+
+    def __str__(self):
+        return self.hospital_name
+
+
+class SupplierProfile(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name="supplier_profile"
+    )
+    company_name = models.CharField(max_length=200)
+    address = models.TextField()
+
+    def __str__(self):
+        return self.company_name
+
+
+class WarehouseProfile(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name="warehouse_profile"
+    )
+    warehouse_name = models.CharField(max_length=200)
+    address = models.TextField()
+
+    def __str__(self):
+        return self.warehouse_name
